@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',     // ✅ tells Next.js to produce static files
+  output: 'export',
   images: { unoptimized: true },
-  trailingSlash: true
+  trailingSlash: true,
+  basePath: '/gallery-app',     // repo name
+  assetPrefix: '/gallery-app/', // repo name
 };
 
 export default nextConfig;
