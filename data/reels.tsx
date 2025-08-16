@@ -1,9 +1,11 @@
 // /data/reels.ts
+import { withBasePath } from "@/lib/prefix";
+
 export type Reel = {
   slug: string;
   title: string;
-  url: string;          // e.g. /videos/*.mp4   (we'll prefix at export)
-  thumbnail: string;    // e.g. /thumbs/*.jpg  (we'll prefix at export)
+  url: string;          // Google Drive or local
+  thumbnail: string;    // add thumbnails later (local or Drive)
   genre: "travel" | "portrait" | "product";
   durationSec: number;
   tools: string[];
@@ -15,8 +17,8 @@ const rawReels: Reel[] = [
   {
     slug: "video-1",
     title: "Portfolio – Landing Video",
-    url: "/public/videos/video-1.mp4",
-    thumbnail: "/public/thumbs/video-1.png",
+    url: "https://drive.google.com/uc?export=download&id=1waR2qpe4u6lSwNsx137gVbWtGQRQygt8",
+    thumbnail: "/thumbs/video-1.png",
     genre: "travel",
     durationSec: 30,
     tools: ["Camera", "Editing Software"],
@@ -26,7 +28,7 @@ const rawReels: Reel[] = [
   {
     slug: "video-2",
     title: "Butterfly Park Travel Reel",
-    url: "/videos/video-2.mp4",
+    url: "https://drive.google.com/uc?export=download&id=1Y8nWwBPTkbEcYWxg2bOyb3iXPcQR8gcx",
     thumbnail: "/thumbs/video-2.jpg",
     genre: "portrait",
     durationSec: 45,
@@ -36,7 +38,7 @@ const rawReels: Reel[] = [
   {
     slug: "video-3",
     title: "Luffy Playing Outside",
-    url: "/videos/video-3.mp4",
+    url: "https://drive.google.com/uc?export=download&id=1HmMasWqVkz8-v0hnchHfTfGRZ_TD2Vwr",
     thumbnail: "/thumbs/video-3.png",
     genre: "product",
     durationSec: 28,
@@ -46,7 +48,7 @@ const rawReels: Reel[] = [
   {
     slug: "video-4",
     title: "Travel Journey",
-    url: "/videos/video-4.mp4",
+    url: "https://drive.google.com/uc?export=download&id=1a2wK0cFmH0qHHeL3aVYs7gsRXlLKbBAI",
     thumbnail: "/thumbs/video-4.png",
     genre: "travel",
     durationSec: 36,
@@ -56,7 +58,7 @@ const rawReels: Reel[] = [
   {
     slug: "video-5",
     title: "Evening Tea with Friends",
-    url: "/videos/video-5.mp4", // 🔁 convert your .mov to .mp4 (see note below)
+    url: "https://drive.google.com/uc?export=download&id=1m3ZzapyFKikCIFhMy43SBAuNSc1rfY4V",
     thumbnail: "/thumbs/video-5.png",
     genre: "portrait",
     durationSec: 52,
@@ -66,7 +68,7 @@ const rawReels: Reel[] = [
   {
     slug: "video-6",
     title: "PawSafe App Showcase",
-    url: "/videos/video-6.mp4",
+    url: "https://drive.google.com/uc?export=download&id=1EjxSBDRlVdGYEBfqP0Jrum41561jbp4Z",
     thumbnail: "/thumbs/video-6.png",
     genre: "product",
     durationSec: 29,
@@ -75,11 +77,9 @@ const rawReels: Reel[] = [
   },
 ];
 
-import { prefix } from "../lib/prefix";
-
-// Export reels with correct base path for GitHub Pages
-export const reels: Reel[] = rawReels.map(r => ({
+// Only prefix local thumbnails, not Google Drive links
+export const reels: Reel[] = rawReels.map((r) => ({
   ...r,
-  url: `${prefix}${r.url}`,
-  thumbnail: `${prefix}${r.thumbnail}`,
+  url: withBasePath(r.url),
+  thumbnail: withBasePath(r.thumbnail),
 }));

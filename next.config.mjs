@@ -1,10 +1,12 @@
+// /next.config.js
 /** @type {import('next').NextConfig} */
+const base = process.env.NEXT_PUBLIC_BASE_PATH?.trim() || "";
+
 const nextConfig = {
-  output: 'export',
-  images: { unoptimized: true },
-  trailingSlash: true,
-  basePath: '/gallery-app',     // repo name
-  assetPrefix: '/gallery-app/', // repo name
+  output: "export",
+  basePath: base,
+  assetPrefix: base,
+  images: { unoptimized: true }, // required for static export
 };
 
-export default nextConfig;
+module.exports = nextConfig;

@@ -25,19 +25,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      # Next.js 13+ with next.config.mjs { output: 'export' }
-      # creates ./out on build (no "next export" step needed)
-      - name: Build (static export)
-        run: npm run build
-        env:
-          NEXT_PUBLIC_BASE_PATH: /gallery-app   # <-- matches your repo name
+      # Configure Pages (recommended by GH)
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
+      - name: Build (static export)
+        env:
+          # 👇 MUST match the repo name exactly (case-sensitive)
+          NEXT_PUBLIC_BASE_PATH: /gallery-app
+          CI: true
+        run: npm run build
+
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

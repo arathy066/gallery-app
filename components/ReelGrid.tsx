@@ -1,18 +1,15 @@
+// /components/ReelGrid.tsx
 "use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import SimpleVideo from "@/components/SimpleVideo";
 import type { Reel } from "@/data/reels";
-
-/** If you use GitHub Pages with basePath, set NEXT_PUBLIC_BASE_PATH="/<repo>" in prod */
-const BASE = (process.env.NEXT_PUBLIC_BASE_PATH || "").trim();
-const withBase = (p: string) => (/^https?:\/\//i.test(p) ? p : `${BASE}${p}`);
+import { withBasePath } from "@/lib/prefix";
 
 export default function ReelGrid({ reels }: { reels: Reel[] }) {
   const [open, setOpen] = useState<Reel | null>(null);
 
-  // Close modal on Escape
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
     window.addEventListener("keydown", onEsc);
@@ -32,10 +29,9 @@ export default function ReelGrid({ reels }: { reels: Reel[] }) {
           >
             <div className="relative">
               {r.thumbnail ? (
-                // ✅ Put aspect ratio on a wrapper and use Image "fill"
                 <div className="relative w-full aspect-video">
                   <Image
-                    src={withBase(r.thumbnail)}
+                    src={withBasePath(r.thumbnail)}
                     alt={r.title}
                     fill
                     unoptimized
@@ -84,7 +80,7 @@ export default function ReelGrid({ reels }: { reels: Reel[] }) {
             </div>
 
             <div className="p-4 space-y-4">
-              <SimpleVideo url={withBase(open.url)} />
+              <SimpleVideo url={withBasePath(open.url)} />
               <p className="text-sm opacity-80">{open.blurb}</p>
               <div className="text-xs opacity-70">
                 Tools: {open.tools.join(" • ")} • {Math.round(open.durationSec)}s • {open.genre}
