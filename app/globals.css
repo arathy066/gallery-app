@@ -1,0 +1,266 @@
+/* --------------------------------------------
+   Tailwind layers
+-------------------------------------------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------
+   CSS Variables (Design Tokens)
+   - Light is default; .dark overrides
+-------------------------------------------- */
+:root {
+  --bg: #fffef9;
+  --text: #0a0a0a;
+  --muted: #6b7280;
+  /* gray-500 */
+  --border: #e5e7eb;
+  /* gray-200 */
+  --card: #ffffff;
+  --overlay: rgba(0, 0, 0, .7);
+
+  /* Cinematic accent (pairs with dark UI) */
+  --accent: #facc15;
+  --accent-100: #977a05;
+  /* yellow-400 */
+  --accent-fg: #111111;
+
+  /* Radii & shadows */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-xl: 20px;
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, .08);
+}
+
+.dark {
+  --bg: #0b0b0f;
+  /* cinematic near-black */
+  --text: #e5e7eb;
+  /* gray-200 */
+  --muted: #9ca3af;
+  /* gray-400 */
+  --border: #1f2937;
+  /* gray-800 */
+  --card: #0f0f14;
+  --overlay: rgba(0, 0, 0, .7);
+
+  --accent: #facc15;
+  /* keep brand pop in dark */
+  --accent-fg: #111111;
+
+  --shadow-card: 0 12px 40px rgba(0, 0, 0, .35);
+}
+
+/* Respect user preference by default */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+  }
+}
+
+/* --------------------------------------------
+   Base resets & typography
+-------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply min-h-screen antialiased;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  /* Font smoothing */
+  html,
+  body,
+  input,
+  button,
+  textarea {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  /* Links */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:not(.unstyled):where(:hover, :focus-visible) {
+    color: var(--accent-100);
+  }
+
+  /* Focus styles (visible + accessible) */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* Images & media */
+  img,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Remove tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Scrollbar (WebKit/Chromium) */
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3f3f46 0%, #262626 100%);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Reduce motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* --------------------------------------------
+   Components (reusable patterns)
+-------------------------------------------- */
+@layer components {
+
+  /* Page container */
+  .container-page {
+    @apply mx-auto w-full px-4;
+    max-width: 72rem;
+    /* ~1152px (max-w-6xl) */
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-12 sm:py-16;
+  }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-hover {
+    @apply transition;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, .18);
+  }
+
+  /* Button (solid + outline) */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium transition;
+    border-radius: var(--radius-md);
+    gap: .5rem;
+  }
+
+  .btn-solid {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  .btn-solid:hover {
+    filter: brightness(0.95);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+  }
+
+  .btn-outline:hover {
+    background: color-mix(in srgb, var(--text) 10%, transparent);
+  }
+
+  /* Badges / Pills */
+  .pill {
+    @apply inline-flex items-center px-2 py-1 text-xs;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--text) 6%, transparent);
+    color: var(--muted);
+  }
+
+  /* Modal backdrop */
+  .backdrop {
+    background: var(--overlay);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Aspect ratio helper (if not using tailwind’s aspect plugin) */
+  .aspect-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+  }
+
+  .aspect-video>* {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* --------------------------------------------
+   Utilities (tiny helpers)
+-------------------------------------------- */
+@layer utilities {
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .border-token {
+    border-color: var(--border);
+  }
+
+  .bg-token {
+    background: var(--bg);
+  }
+
+  .bg-card {
+    background: var(--card);
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+}
