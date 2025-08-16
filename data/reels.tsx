@@ -2,8 +2,8 @@
 export type Reel = {
   slug: string;
   title: string;
-  url: string;          // Local: /videos/*.mp4
-  thumbnail: string;    // Local: /thumbs/*.jpg
+  url: string;          // e.g. /videos/*.mp4   (we'll prefix at export)
+  thumbnail: string;    // e.g. /thumbs/*.jpg  (we'll prefix at export)
   genre: "travel" | "portrait" | "product";
   durationSec: number;
   tools: string[];
@@ -11,7 +11,7 @@ export type Reel = {
   featured?: boolean;
 };
 
-export const reels: Reel[] = [
+const rawReels: Reel[] = [
   {
     slug: "video-1",
     title: "Portfolio – Landing Video",
@@ -56,7 +56,7 @@ export const reels: Reel[] = [
   {
     slug: "video-5",
     title: "Evening Tea with Friends",
-    url: "/videos/video-5.mov",
+    url: "/videos/video-5.mp4", // 🔁 convert your .mov to .mp4 (see note below)
     thumbnail: "/thumbs/video-5.png",
     genre: "portrait",
     durationSec: 52,
@@ -74,3 +74,12 @@ export const reels: Reel[] = [
     blurb: "A quick demo of PawSafe, a fast-scanning app designed to keep pets safe by identifying harmful items instantly.",
   },
 ];
+
+import { prefix } from "../lib/prefix";
+
+// Export reels with correct base path for GitHub Pages
+export const reels: Reel[] = rawReels.map(r => ({
+  ...r,
+  url: `${prefix}${r.url}`,
+  thumbnail: `${prefix}${r.thumbnail}`,
+}));

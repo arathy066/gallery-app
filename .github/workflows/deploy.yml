@@ -30,9 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # With next.config.mjs { output: 'export' }, "build" generates ./out
+      # Next.js 13+ with next.config.mjs { output: 'export' }
+      # creates ./out on build (no "next export" step needed)
       - name: Build (static export)
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /gallery-app   # <-- matches your repo name
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
