@@ -1,6 +1,6 @@
-// /next.config.js
+// /next.config.cjs   ← or next.config.js
 /** @type {import('next').NextConfig} */
-const base = process.env.NEXT_PUBLIC_BASE_PATH?.trim() || "";
+const base = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").trim();
 
 const nextConfig = {
   output: "export",
