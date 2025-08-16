@@ -15,8 +15,8 @@ const rawReels: Reel[] = [
   {
     slug: "video-1",
     title: "Portfolio – Landing Video",
-    url: "/videos/video-1.mp4",
-    thumbnail: "/thumbs/video-1.png",
+    url: "./videos/video-1.mp4",
+    thumbnail: "./thumbs/video-1.png",
     genre: "travel",
     durationSec: 30,
     tools: ["Camera", "Editing Software"],
@@ -26,8 +26,8 @@ const rawReels: Reel[] = [
   {
     slug: "video-2",
     title: "Butterfly Park Travel Reel",
-    url: "/videos/video-2.mp4",
-    thumbnail: "/thumbs/video-2.jpg",
+    url: "./videos/video-2.mp4",
+    thumbnail: "./thumbs/video-2.jpg",
     genre: "portrait",
     durationSec: 45,
     tools: ["Camera", "Lighting Kit"],
@@ -36,8 +36,8 @@ const rawReels: Reel[] = [
   {
     slug: "video-3",
     title: "Luffy Playing Outside",
-    url: "/videos/video-3.mp4",
-    thumbnail: "/thumbs/video-3.png",
+    url: "./videos/video-3.mp4",
+    thumbnail: "./thumbs/video-3.png",
     genre: "product",
     durationSec: 28,
     tools: ["Camera", "Tripod"],
@@ -46,8 +46,8 @@ const rawReels: Reel[] = [
   {
     slug: "video-4",
     title: "Travel Journey",
-    url: "/videos/video-4.mp4",
-    thumbnail: "/thumbs/video-4.png",
+    url: "./videos/video-4.mp4",
+    thumbnail: "./thumbs/video-4.png",
     genre: "travel",
     durationSec: 36,
     tools: ["Camera", "Gimbal"],
@@ -56,8 +56,8 @@ const rawReels: Reel[] = [
   {
     slug: "video-5",
     title: "Evening Tea with Friends",
-    url: "/videos/video-5.mp4", // 🔁 convert your .mov to .mp4 (see note below)
-    thumbnail: "/thumbs/video-5.png",
+    url: "./videos/video-5.mp4", // 🔁 convert your .mov to .mp4 (see note below)
+    thumbnail: "./thumbs/video-5.png",
     genre: "portrait",
     durationSec: 52,
     tools: ["Camera", "Prime Lens"],
