@@ -15,8 +15,8 @@ const rawReels: Reel[] = [
   {
     slug: "video-1",
     title: "Portfolio – Landing Video",
-    url: "public/videos/video-1.mp4",
-    thumbnail: "public/thumbs/video-1.png",
+    url: "/public/videos/video-1.mp4",
+    thumbnail: "/public/thumbs/video-1.png",
     genre: "travel",
     durationSec: 30,
     tools: ["Camera", "Editing Software"],
