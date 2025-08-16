@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true, // optional
-    // add other Next.js options here as needed
+  output: 'export',     // ✅ tells Next.js to produce static files
+  images: { unoptimized: true },
+  trailingSlash: true
 };
 
 export default nextConfig;
