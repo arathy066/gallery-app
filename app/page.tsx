@@ -1,11 +1,7 @@
 "use client";
 
 import Hero from "@/components/Hero";
-// If you switched to the native <video> grid I sent:
-import ReelGridNative from "@/components/ReelGridNative";
-// If you’re still using the ReactPlayer grid, replace the import above with:
-// import ReelGrid from "@/components/ReelGrid";
-
+import ReelGrid from "@/components/ReelGrid";
 import { reels } from "@/data/reels";
 
 export default function HomePage() {
@@ -23,19 +19,12 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      {/* Ensure your <section> in Hero has id="hero" OR wrap it here */}
-      <div id="hero">
-        <Hero />
-      </div>
+      <Hero />
 
       {/* Gallery Section */}
       <section id="gallery" className="mx-auto max-w-6xl px-4 py-12">
         <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
-        {/* Use the grid you chose */}
-        <ReelGridNative reels={reels} />
-        {/* If using ReactPlayer version instead:
-            <ReelGrid reels={reels} />
-        */}
+        <ReelGrid reels={reels} />
       </section>
 
       {/* About Section */}
@@ -62,7 +51,6 @@ export default function HomePage() {
             className="rounded-lg border px-4 py-2 hover:bg-white/10"
             href="https://www.instagram.com/arathyy.r?igsh=MWtjejNveXM1NWoz"
             target="_blank"
-            rel="noreferrer noopener"
           >
             Instagram
           </a>
@@ -70,7 +58,6 @@ export default function HomePage() {
             className="rounded-lg border px-4 py-2 hover:bg-white/10"
             href="https://www.linkedin.com/in/arathy-rajesh-6940392b8/"
             target="_blank"
-            rel="noreferrer noopener"
           >
             LinkedIn
           </a>
