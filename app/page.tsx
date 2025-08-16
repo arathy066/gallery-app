@@ -63,6 +63,13 @@ export default function HomePage() {
           </a>
         </div>
       </section>
+      <video
+  src="https://drive.google.com/uc?export=download&id=1waR2qpe4u6lSwNsx137gVbWtGQRQygt8"
+  controls
+  playsInline
+  preload="metadata"
+  style={{ width: "100%", height: "auto" }}
+/>
 
       {/* Footer */}
       <footer className="border-t border-white/10">

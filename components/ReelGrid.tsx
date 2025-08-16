@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import SimpleVideo from "@/components/SimpleVideo";
 import type { Reel } from "@/data/reels";
-import { withBasePath } from "@/lib/prefix";
 
 export default function ReelGrid({ reels }: { reels: Reel[] }) {
   const [open, setOpen] = useState<Reel | null>(null);
@@ -18,7 +17,6 @@ export default function ReelGrid({ reels }: { reels: Reel[] }) {
 
   return (
     <>
-      {/* Grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {reels.map((r) => (
           <button
@@ -31,7 +29,7 @@ export default function ReelGrid({ reels }: { reels: Reel[] }) {
               {r.thumbnail ? (
                 <div className="relative w-full aspect-video">
                   <Image
-                    src={withBasePath(r.thumbnail)}
+                    src={r.thumbnail}   // ✅ already base-pathed or external
                     alt={r.title}
                     fill
                     unoptimized
@@ -57,7 +55,6 @@ export default function ReelGrid({ reels }: { reels: Reel[] }) {
         ))}
       </div>
 
-      {/* Modal */}
       {open && (
         <div
           role="dialog"
@@ -71,16 +68,13 @@ export default function ReelGrid({ reels }: { reels: Reel[] }) {
           >
             <div className="p-4 border-b flex items-center justify-between">
               <h3 className="text-lg font-semibold">{open.title}</h3>
-              <button
-                onClick={() => setOpen(null)}
-                className="text-sm opacity-80 hover:opacity-100"
-              >
+              <button onClick={() => setOpen(null)} className="text-sm opacity-80 hover:opacity-100">
                 Close
               </button>
             </div>
 
             <div className="p-4 space-y-4">
-              <SimpleVideo url={withBasePath(open.url)} />
+              <SimpleVideo url={open.url} />   {/* ✅ no extra prefixing */}
               <p className="text-sm opacity-80">{open.blurb}</p>
               <div className="text-xs opacity-70">
                 Tools: {open.tools.join(" • ")} • {Math.round(open.durationSec)}s • {open.genre}

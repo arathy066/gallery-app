@@ -2,7 +2,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import type React from "react";
 
 type RPProps = {
@@ -33,6 +33,10 @@ export default function SimpleVideo({
   const [fallback, setFallback] = useState(false);
   const safeUrl = useMemo(() => (url?.trim() ? url.trim() : ""), [url]);
 
+  useEffect(() => {
+    console.log("[SimpleVideo] url =", safeUrl);
+  }, [safeUrl]);
+
   if (!safeUrl) {
     return (
       <div className="aspect-video w-full rounded-xl border grid place-items-center text-sm opacity-70">
@@ -46,12 +50,13 @@ export default function SimpleVideo({
       <div className="aspect-video w-full overflow-hidden rounded-xl border">
         <video
           key={safeUrl}
-          src={safeUrl}
           controls={controls}
           playsInline
           preload="metadata"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        >
+          <source src={safeUrl} type="video/mp4" />
+        </video>
       </div>
     );
   }
@@ -72,10 +77,7 @@ export default function SimpleVideo({
         config={{
           file: {
             forceVideo: true,
-            attributes: {
-              preload: "metadata",
-              playsInline: true,
-            },
+            attributes: { preload: "metadata", playsInline: true },
           },
         }}
       />
