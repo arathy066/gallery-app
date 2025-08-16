@@ -68,7 +68,7 @@ const rawReels: Reel[] = [
   {
     slug: "video-6",
     title: "PawSafe App Showcase",
-    url: "https://drive.google.com/uc?export=download&id=1EjxSBDRlVdGYEBfqP0Jrum41561jbp4Z",
+    url: "/videos/video-6.mp4",
     thumbnail: "/thumbs/video-6.png",
     genre: "product",
     durationSec: 29,
